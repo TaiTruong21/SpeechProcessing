@@ -10,7 +10,7 @@ README:
     leap and saves them as {filename}###.wav in a new folder called 
     {foldername} Mon Day Time. Hold q to end the recordings.
     
-    Libraries used: os, shutil, datetime, keyboard
+    Libraries used: os, shutil, datetime, keyboard, glob
 """
 
 import os, datetime, keyboard, glob, shutil
@@ -20,7 +20,7 @@ time = currentDT.strftime('%b %d %H %M %S')
 
 #filename = 'recording'
 foldername = 'Recordings'
-rectime = 5
+rectime = 2
 
 folderstring = './%s %s/'%(foldername, time) 
 os.mkdir(folderstring)
