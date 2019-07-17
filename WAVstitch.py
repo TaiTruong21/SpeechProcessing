@@ -10,17 +10,18 @@ README:
 import os
 from pydub import AudioSegment
 
-combinationName = 'test'
+combinationName = 'MoonCombo'
 directory = './exports/'
+sourceDir = './Moon recording/'
 
 combined = AudioSegment.empty()
 
-for file in os.listdir('./keyboard only/'):
+for file in os.listdir(sourceDir):
     if file.endswith('.wav'):
         print(file)
-        add = AudioSegment.from_file('./keyboard only/'+file)
+        add = AudioSegment.from_file(sourceDir+file)
         combined += add
 
 if not os.path.exists(directory):
     os.makedirs(directory)
-combined.export('./exports/%s.wav'%(combinationName), format = 'wav')
+combined.export('%s%s.wav'%(directory, combinationName), format = 'wav')
