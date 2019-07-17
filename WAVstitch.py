@@ -10,9 +10,9 @@ README:
 import os
 from pydub import AudioSegment
 
-combinationName = 'MoonCombo'
+combinationName = 'SpeechAndNoiseCombo'
 directory = './exports/'
-sourceDir = './Moon recording/'
+sourceDir = './speech and noise/'
 
 combined = AudioSegment.empty()
 
