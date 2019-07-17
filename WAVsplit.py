@@ -16,5 +16,5 @@ if not os.path.exists(directory):
     os.makedirs(directory)
     
 for i, chunk in enumerate(orig[::5000]):
-    with open('%sMoonSeg-%s.wav'%(directory, i), 'wb') as f:
+    with open('%sMoon5SecSeg-%s.wav'%(directory, i+1), 'wb') as f:
         chunk.export(f, format='wav')
