@@ -7,16 +7,19 @@ Created on Fri May 31 12:09:36 2019
 
 import numpy as np
 import scipy.fftpack
-#import random
-#import matplotlib.pyplot as plt
+import os
 import scipy.io
 from scipy.io import wavfile as wf
 
+printout = 0;
+
 Fs, data = wf.read("./exports/SpeechAndNoiseCombo.wav")
+directory = './sancDetect/'
 T = 1/Fs
 frameSize = 0.5
-eThresh = 20000*100000
-fThresh = 195
+ebase = 21
+eThresh = ebase*100000000
+fThresh = 190
 sfmThresh = 2000
 fftN = 20000
 freqs = np.fft.fftfreq(fftN, T)
@@ -35,13 +38,6 @@ maxFreq = []
 allEnergy = []
 allMediandB = []
 allClass = []
-
-print("samplesPerFrame = ",samplesPerFrame)
-print("numFrames = ",numFrames)
-print("fullTime = ",fullTime)
-print("data length = ",len(data))
-
-
 
 for i in range(numFrames):
     
@@ -73,13 +69,23 @@ for i in range(numFrames):
     if (SFM > sfmThresh): counter+=1
     if (counter > 1):
         isSpeech = True
-        allClass.append([1, time, domFreq, energy/100000, SFM])
+        #allClass.append([1, time, domFreq, energy/100000, SFM])
+        allClass.append([1, time])
     else:
         isSpeecch = False
-        allClass.append([0, time, domFreq, energy/100000, SFM])
+        #allClass.append([0, time, domFreq, energy/100000, SFM])
+        allClass.append([0, time])
 
-    #print('Time: ', time, '\n', isSpeech, "\n Energy = ", energy, "\n domFreq = ", domFreq, "\n SFM = ", SFM)
-np.set_printoptions(precision=3)
-np.set_printoptions(suppress=True)
-print(np.matrix(allClass))
-np.savetxt('results.txt', np.matrix(allClass), fmt='%.2f')
+if printout:
+    print("samplesPerFrame = ",samplesPerFrame)
+    print("numFrames = ",numFrames)
+    print("fullTime = ",fullTime)
+    print("data length = ",len(data))
+    np.set_printoptions(precision=3)
+    np.set_printoptions(suppress=True)
+    print(np.matrix(allClass))
+    
+if not os.path.exists(directory):
+    os.makedirs(directory)
+#np.savetxt('results.txt', np.matrix(allClass), fmt='%.2f')
+np.savetxt('%se%d_f%d_s%d.csv'%(directory, ebase, fThresh, sfmThresh), np.matrix(allClass), delimiter = ',', fmt='%.1f')
