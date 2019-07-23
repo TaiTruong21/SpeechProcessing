@@ -5,10 +5,10 @@ if (isfile(saveName))
     pBase = "%s already exists, do you want to overwrite? y/n [Y]\n";
     prompt = sprintf(pBase, saveName);
     x = input(prompt,'s');
-     if (x == 'y')
+    if (x == 'y')
+       delete(saveName);
+    elseif isempty(x)
         delete(saveName);
-     elseif isempty(x)
-         delete(saveName);
     else
         fprintf('Quitting loader\n');
         return;

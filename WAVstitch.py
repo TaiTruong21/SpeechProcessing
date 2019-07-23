@@ -12,7 +12,7 @@ from pydub import AudioSegment
 
 combinationName = 'TaiMoonNoisy'
 directory = './exports/'
-sourceDir = './TestAudioSetting/'
+sourceDir = './RealTestAudioSetting/'
 
 combined = AudioSegment.empty()
 
