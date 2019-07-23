@@ -17,10 +17,15 @@ Fs, data = wf.read("./exports/SpeechAndNoiseCombo.wav")
 directory = './sancDetect/'
 T = 1/Fs
 frameSize = 0.5
-ebase = 21
-eThresh = ebase*100000000
-fThresh = 190
-sfmThresh = 2000
+
+params = [33, 0, 775, 0]
+
+ebase = params[0]
+fThresh = params[1]
+fTopThresh = params[2]
+sfmThresh = params[3]
+
+eThresh = ebase*(1e8)
 fftN = 20000
 freqs = np.fft.fftfreq(fftN, T)
 
@@ -64,17 +69,14 @@ for i in range(numFrames):
     isSpeech = False
     counter = 0    
     #updates counter to determine if frame is speech
-    if (domFreq > fThresh): counter+=1
-    if (energy > eThresh): counter+=1
-    if (SFM > sfmThresh): counter+=1
-    if (counter > 1):
+    if (domFreq < fTopThresh) and (energy > eThresh):
         isSpeech = True
-        #allClass.append([1, time, domFreq, energy/100000, SFM])
-        allClass.append([1, time])
+        allClass.append([1, time, energy/(1e8), domFreq, SFM])
+        #allClass.append([1, time])
     else:
         isSpeecch = False
-        #allClass.append([0, time, domFreq, energy/100000, SFM])
-        allClass.append([0, time])
+        allClass.append([0, time, energy/(1e8), domFreq, SFM])
+        #allClass.append([0, time])
 
 if printout:
     print("samplesPerFrame = ",samplesPerFrame)
@@ -88,4 +90,4 @@ if printout:
 if not os.path.exists(directory):
     os.makedirs(directory)
 #np.savetxt('results.txt', np.matrix(allClass), fmt='%.2f')
-np.savetxt('%se%d_f%d_s%d.csv'%(directory, ebase, fThresh, sfmThresh), np.matrix(allClass), delimiter = ',', fmt='%.1f')
+np.savetxt('%se%d_f%d_%d_s%d.csv'%(directory, ebase, fThresh, fTopThresh, sfmThresh), np.matrix(allClass), delimiter = ',', fmt='%.1f')
