@@ -1,0 +1,8 @@
+<manifest xmlns:ml="magicleap" ml:developer_id="da65d50d-6a3f-4efd-bccd-6ef143a42bfb" ml:package="com.tai.server" ml:version_code="1" ml:version_name="">
+  <application ml:min_api_level="2" ml:sdk_version="1.0" ml:visible_name="ServerTest">
+    <uses-privilege ml:name="LowLatencyLightwear" />
+    <component ml:binary_name="bin/Player.elf" ml:name=".fullscreen" ml:type="Fullscreen" ml:visible_name="ServerTest">
+      <icon ml:model_folder="Icon/Model" ml:portal_folder="Icon/Portal" />
+    </component>
+  </application>
+</manifest>
