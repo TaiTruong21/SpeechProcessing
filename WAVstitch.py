@@ -10,9 +10,9 @@ README:
 import os
 from pydub import AudioSegment
 
-combinationName = 'SpeechAndNoiseCombo'
+combinationName = 'TaiMoonNoisy'
 directory = './exports/'
-sourceDir = './speech and noise/'
+sourceDir = './TestAudioSetting/'
 
 combined = AudioSegment.empty()
 
