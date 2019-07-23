@@ -1,5 +1,5 @@
-D = load('sancRawData.mat');
-T = load('sancTruth.mat');
+D = load('taimoonnoisyRawData.mat');
+%T = load('sancTruth.mat');
 
 fields = fieldnames(D);
 close all;
@@ -7,46 +7,46 @@ close all;
 replace = [];
 
 time = 0:0.1:120;
-
-for i = 1:numel(time)
-    for r = 1:length(T.AAAsancTruth)
-        if (time(i) >= T.AAAsancTruth(r,1)) && (time(i) <= T.AAAsancTruth(r,2))
-            speech.truth(i) = 1;
-        elseif (time(i) > T.AAAsancTruth(r,2))
-            speech.truth(i) = 0;
-        end
-    end
-end
+% 
+% for i = 1:numel(time)
+%     for r = 1:length(T.AAAsancTruth)
+%         if (time(i) >= T.AAAsancTruth(r,1)) && (time(i) <= T.AAAsancTruth(r,2))
+%             speech.truth(i) = 1;
+%         elseif (time(i) > T.AAAsancTruth(r,2))
+%             speech.truth(i) = 0;
+%         end
+%     end
+% end
 figure(1);
 hold on;
-
-top = length(fields);
-for i = 1:length(T.AAAsancTruth)
-    plot(T.AAAsancTruth(i,:), [top top], 'LineWidth', 2, 'color', 'b');
-end
-text(1, top+0.5, 'Truth');
-
+% 
+% top = length(fields);
+% for i = 1:length(T.AAAsancTruth)
+%     plot(T.AAAsancTruth(i,:), [top top], 'LineWidth', 2, 'color', 'b');
+% end
+% text(1, top+0.5, 'Truth');
+top = 5;
 counter = top-1;
 
 figure(2);
 hold on;
-timer = 0.5:0.5:120;
-for i = 1:numel(timer)
-    for r = 1:length(T.AAAsancTruth)
-        if (timer(i) >= T.AAAsancTruth(r,1)) && (timer(i) <= T.AAAsancTruth(r,2))
-            tgraph.truth(i) = 10000;
-        elseif (time(i) > T.AAAsancTruth(r,2))
-            tgraph.truth(i) = 0;
-        end
-    end
-end
-
-for mask = 1:3
-    subplot(3,1,mask);
-    hold on;
-    grid on;
-    fill(timer, tgraph.truth, 'k', 'facealpha', .3);
-end
+timer = 0.5:0.5:170;
+% for i = 1:numel(timer)
+%     for r = 1:length(T.AAAsancTruth)
+%         if (timer(i) >= T.AAAsancTruth(r,1)) && (timer(i) <= T.AAAsancTruth(r,2))
+%             tgraph.truth(i) = 10000;
+%         elseif (time(i) > T.AAAsancTruth(r,2))
+%             tgraph.truth(i) = 0;
+%         end
+%     end
+% end
+% 
+% for mask = 1:3
+%     subplot(3,1,mask);
+%     hold on;
+%     grid on;
+%     fill(timer, tgraph.truth, 'k', 'facealpha', .3);
+% end
 
 for vp=fields'
     subplot(3,1,1);
@@ -79,6 +79,7 @@ refline(0, 2500);
 figure(1);
 for fn=fields'
     %convert python output to start & stop times
+    start = 0;
     for i = 2:length(D.(fn{1}))
         if D.(fn{1})(i, 1) == 1 && D.(fn{1})(i-1, 1) == 0
             start = D.(fn{1})(i, 2);
@@ -99,14 +100,14 @@ for fn=fields'
             end
         end
     end
-    comparison.(fn{1}) = speech.(fn{1}) == speech.truth;
-    accuracy.(fn{1}) = sum(comparison.(fn{1})) / length(comparison.(fn{1}));
-    
+%     comparison.(fn{1}) = speech.(fn{1}) == speech.truth;
+%     accuracy.(fn{1}) = sum(comparison.(fn{1})) / length(comparison.(fn{1}));
+%     
     %plot data
     for i = 1:length(D.(fn{1}))
         plot(D.(fn{1})(i,:), [counter counter], 'LineWidth', 2, 'color', 'r');
     end
-    text(1, counter+0.5, ['Parameters: ' fn{1} ' Accuracy: ' num2str(accuracy.(fn{1}) * 100) '%'], 'interpreter', 'none');
+%     text(1, counter+0.5, ['Parameters: ' fn{1} ' Accuracy: ' num2str(accuracy.(fn{1}) * 100) '%'], 'interpreter', 'none');
     counter = counter - 1;
 end
 

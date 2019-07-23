@@ -13,8 +13,8 @@ from scipy.io import wavfile as wf
 
 printout = 0;
 
-Fs, data = wf.read("./exports/SpeechAndNoiseCombo.wav")
-directory = './sancDetect/'
+Fs, data = wf.read("./exports/TaiMoonNoisy.wav")
+directory = './TaiMoonNoisyDetect/'
 T = 1/Fs
 frameSize = 0.5
 
