@@ -26,7 +26,7 @@ top = length(fields);
 for i = 1:length(T.(truthField{1}))
     plot(T.(truthField{1})(i,:), [top top], 'LineWidth', 2, 'color', 'b');
 end
-text(1, top+0.5, 'Truth');
+
 counter = top-1;
 
 timer = 0.5:0.5:170;
@@ -46,7 +46,7 @@ for mask = 1:3
     subplot(3,1,mask);
     hold on;
     grid on;
-    area(timer, tgraph.truth, 'facealpha', .3);
+    shade = area(timer, tgraph.truth, 'facealpha', .3);
 end
 
 for i = 2:3
@@ -65,7 +65,6 @@ for i = 2:3
 end
 figure(2);
 pos1 = get(gcf,'Position'); % get position of Figure(1) 
-set(gcf,'Position', pos1 - [pos1(3)/2,0,0,0]) % Shift position of Figure(1) 
 subplot(3,1,1);
 ylim([0 200]);
 title('energy');
@@ -104,19 +103,42 @@ for fn=fields'
             end
         end
     end
+    noisematch = 0;
+    speechmatch = 0;
+    for i = 1:numel(time)
+        if ((speech.(fn{1})(i) == 0) && (speech.truth(i) == 0))
+            noisematch = noisematch + 1;
+        elseif ((speech.(fn{1})(i) == 1) && (speech.truth(i) == 1))
+            speechmatch = speechmatch + 1;
+        end
+    end
+    noiseacc.truth = (length(speech.truth) - sum(speech.truth))/length(speech.truth);
+    noiseacc.(fn{1}) = noisematch/numel(time);
+    noiseacc.(fn{1}) = noiseacc.(fn{1}) / noiseacc.truth;
+    speechacc.truth = 1 - noiseacc.truth;
+    speechacc.(fn{1}) = speechmatch/numel(time);
+    speechacc.(fn{1}) = speechacc.(fn{1}) / speechacc.truth;
     comparison.(fn{1}) = speech.(fn{1}) == speech.truth;
+    
     accuracy.(fn{1}) = sum(comparison.(fn{1})) / length(comparison.(fn{1}));
     
     %plot data
     for i = 1:length(D.(fn{1}))
         plot(D.(fn{1})(i,:), [counter counter], 'LineWidth', 2, 'color', 'r');
     end
-    text(1, counter+0.5, ['Parameters: ' fn{1} ' Accuracy: ' num2str(accuracy.(fn{1}) * 100) '%'], 'interpreter', 'none');
+    lbl = strrep(fn{1}, '_', ' | ');
+    text(1, counter+0.5, ['Parameters: ' lbl]);
+    text(time(end)/2 - 35, counter+0.5, ['Accuracy: ' num2str(accuracy.(fn{1}) * 100) '%']);
+    text(time(end)/2, counter+0.5, ['Speech Accuracy: ' num2str(speechacc.(fn{1}) * 100) '%']);
+    text(time(end) - 25, counter+0.5, ['Noise Accuracy: ' num2str(noiseacc.(fn{1}) * 100) '%']);
     counter = counter - 1;
 end
 
 ylim([counter top+1])
 grid on;
+
+text(1, top+0.5, ['Truth || Speech: ' num2str((1 - noiseacc.truth)*100)...
+    '% || Noise: ' num2str(noiseacc.truth * 100) '%']);
 
 timer = 0.5:0.5:170;
 for i = 1:numel(timer)
@@ -138,8 +160,6 @@ for mask = 1:3
 end
 
 figure(3);
-pos1 = get(gcf,'Position'); % get position of Figure(1) 
-set(gcf,'Position', pos1 + [pos1(3)/2,0,0,0]) % Shift position of Figure(1) 
 subplot(3,1,1);
 ylim([0 200]);
 title('energy');
@@ -156,3 +176,26 @@ refline(0, 2500);
 % pos2 = get(gcf,'Position');  % get position of Figure(2) 
 % set(gcf,'Position', pos2 + [pos1(3)/2,0,0,0]) % Shift position of Figure(2)
 hold off;
+
+for i = 1:3
+    f = figure(i);
+    f.WindowState = 'maximized';
+end
+%%
+figure(1)
+xlabel('Time (sec)');
+ylabel('Parameter Set');
+title('Ground Truth vs Detected Speech', 'FontSize', 14.5);
+figure(2);
+for i = 1:3
+    subplot(3,1,i);
+    xlabel('Time (sec)');
+end
+subplot(3,1,1);
+ylabel(('Energy Level (\times10^8)'));
+subplot(3,1,2);
+ylabel('Frequency (Hz)');
+subplot(3,1,3);
+ylabel('SFM Level');
+sgtitle('Values of Input Audio (Blue is Speech)');
+figure(1);

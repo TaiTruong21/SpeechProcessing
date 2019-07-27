@@ -18,7 +18,7 @@ directory = './TaiMoonNoisyDetect/'
 T = 1/Fs
 frameSize = 0.5
 
-params = [33, 0, 775, 0]
+params = [43, 0, 775, 0]
 
 ebase = params[0]
 fThresh = params[1]
