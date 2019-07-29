@@ -13,11 +13,11 @@ import scipy.fftpack
 import scipy.io
 from scipy.io import wavfile as wf
 
-isSpeech = False
-
 def detector(dataPath, params = [43,0,775], frameSize = 0.5):
     Fs, data = wf.read(dataPath)
     T = 1/Fs
+    
+    isSpeech = False 
     
     ebase = params[0]
     fThresh = params[1]
@@ -93,6 +93,8 @@ def detect5sec(dataPath, params = [43,775], frameSize = 0.5):
 
     numFrames = 10
     samplesPerFrame = (int)(frameSize * Fs)
+    
+    isSpeech = False
     
     for i in range(numFrames):
         
