@@ -30,7 +30,7 @@ def detector(dataPath, params = [43,0,775], frameSize = 0.5):
     data = data.tolist()
     N = len(data)
     fullTime = N*T
-    carry = fullTime * frameSize
+    carry = fullTime % frameSize
     if (carry != 0):
         data.append([0]*int(carry*Fs))                         #0padding data for even sized frames
         fullTime = len(data)*T
@@ -47,7 +47,7 @@ def detector(dataPath, params = [43,0,775], frameSize = 0.5):
         #finds the overall properties of input frame
         frame = data[(i*samplesPerFrame):(i*samplesPerFrame + samplesPerFrame)]
         fftFrame = scipy.fftpack.fft(frame, fftN)
-        pos = fftFrame[:N//2]
+        pos = fftFrame[:fftN//2]
         mag = np.abs(pos)                                      #only positive values
         
         #calculates 3 features used for voice detection
@@ -77,9 +77,45 @@ def detector(dataPath, params = [43,0,775], frameSize = 0.5):
         
         if (last and isSpeech):
             return isSpeech
+
+def detect5sec(dataPath, params = [43,775], frameSize = 0.5):
+    Fs, data = wf.read(dataPath)
+    T = 1/Fs
     
+    ebase = params[0]
+    eThresh = ebase*(1e8)
+    fTopThresh = params[1]
+    
+    fftN = 20000
+    freqs = np.fft.fftfreq(fftN, T)
+    
+    data = data.tolist()
+
+    numFrames = 10
+    samplesPerFrame = (int)(frameSize * Fs)
+    
+    for i in range(numFrames):
         
-    #if not os.path.exists(directory):
-    #    os.makedirs(directory)
-    #np.savetxt('results.txt', np.matrix(allClass), fmt='%.2f')
-    #np.savetxt('%se%d_f%d_%d_s%d.csv'%(directory, ebase, fThresh, fTopThresh, sfmThresh), np.matrix(allClass), delimiter = ',', fmt='%.1f')
+        #finds the overall properties of input frame
+        frame = data[(i*samplesPerFrame):(i*samplesPerFrame + samplesPerFrame)]
+        fftFrame = scipy.fftpack.fft(frame, fftN)
+        pos = fftFrame[:fftN//2]
+        mag = np.abs(pos)                                      #only positive values
+        pwr = mag**2
+        energy = np.sum(pwr)/(fftN//2)
+        
+        #calculate the features used for voice detection
+        maxindex = np.argmax(mag)
+        domFreq = freqs[maxindex] #dominant Frequency of frame F(i)
+        pwr = mag**2
+
+        last = isSpeech
+        #updates counter to determine if frame is speech
+        if (domFreq < fTopThresh) and (energy > eThresh):
+            isSpeech = True
+        else:
+            isSpeech = False
+        
+        if (last and isSpeech):
+            return isSpeech
+    
