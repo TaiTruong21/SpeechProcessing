@@ -5,7 +5,8 @@ def compare(SAMPLING_RATE= 44100):
     import os
     import time
     from IPython.display import clear_output
-    from Scripts import speechrate, speechdetectmodule
+    from Scripts import speechrate
+    from Scripts import speechdetectmodule as sdm
     import soundfile as sf
     import csv
     plt.ion()
@@ -45,8 +46,8 @@ def compare(SAMPLING_RATE= 44100):
             data, samplerate = sf.read('./Scripts/mic10%03d.raw'%filecount, channels =1, samplerate = SAMPLING_RATE, subtype = 'FLOAT')
             
             sf.write('./wavFiles/rec10%03d.wav' %filecount, data, samplerate)
-            
-            if speechdetectmodule.detect5sec("C:\\Users\\truon\\Desktop\\MayRecord31st\\MayRecord31st\\wavFiles\\rec10%03d.wav" %filecount):
+            analysis = sdm.detect5sec("C:\\Users\\truon\\Desktop\\MayRecord31st\\MayRecord31st\\wavFiles\\rec10%03d.wav" %filecount)
+            if analysis['speech']:
                 sprate = speechrate.getrate(filecount=filecount,wave_file = "wavFiles\\rec10%03d.wav" %filecount)
                 print("rate of speech" , sprate)
                 rates[:-1] = rates[1:]
