@@ -46,7 +46,7 @@ def compare(SAMPLING_RATE= 44100):
             data, samplerate = sf.read('./Scripts/mic10%03d.raw'%filecount, channels =1, samplerate = SAMPLING_RATE, subtype = 'FLOAT')
             
             sf.write('./wavFiles/rec10%03d.wav' %filecount, data, samplerate)
-            analysis = sdm.detect5sec("C:\\Users\\truon\\Desktop\\MayRecord31st\\MayRecord31st\\wavFiles\\rec10%03d.wav" %filecount)
+            analysis = sdm.detect5sec("./wavFiles/rec10%03d.wav" %filecount)
             if analysis['speech']:
                 sprate = speechrate.getrate(filecount=filecount,wave_file = "wavFiles\\rec10%03d.wav" %filecount)
                 print("rate of speech" , sprate)
