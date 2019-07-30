@@ -90,34 +90,29 @@ def detect5sec(dataPath, params = [43,775], frameSize = 0.5):
     freqs = np.fft.fftfreq(fftN, T)
     
     data = data.tolist()
-
-    numFrames = 10
     samplesPerFrame = (int)(frameSize * Fs)
     
     isSpeech = False
-    
-    for i in range(numFrames):
-        
+    for i in range(10):
         #finds the overall properties of input frame
         frame = data[(i*samplesPerFrame):(i*samplesPerFrame + samplesPerFrame)]
         fftFrame = scipy.fftpack.fft(frame, fftN)
         pos = fftFrame[:fftN//2]
         mag = np.abs(pos)                                      #only positive values
+        domFreq = freqs[np.argmax(mag)]
+        if (domFreq > fTopThresh):
+            isSpeech = False
+            continue
         pwr = mag**2
         energy = np.sum(pwr)/(fftN//2)
-        
-        #calculate the features used for voice detection
-        maxindex = np.argmax(mag)
-        domFreq = freqs[maxindex] #dominant Frequency of frame F(i)
-        pwr = mag**2
-
-        last = isSpeech
-        #updates counter to determine if frame is speech
-        if (domFreq < fTopThresh) and (energy > eThresh):
-            isSpeech = True
-        else:
+        if (energy < eThresh):
             isSpeech = False
-        
-        if (last and isSpeech):
-            return isSpeech
+            continue
+        else:
+            last = isSpeech
+            isSpeech = True
+            if (last and isSpeech):
+                return True
+    return False
+   
     
