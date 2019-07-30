@@ -13,6 +13,7 @@ def compare(SAMPLING_RATE= 44100):
     import csv
     plt.ion()
 
+    sprate = 0
     print(os.getcwd())
     while not os.path.exists("Scripts\\mic10001.raw"):
         time.sleep(1)
@@ -50,12 +51,15 @@ def compare(SAMPLING_RATE= 44100):
             
             sf.write('./wavFiles/rec10%03d.wav' %filecount, data, samplerate)
             
+            rates = [0, sprate]
             sprate = speechrate.getrate(filecount=filecount,wave_file = "wavFiles\\rec10%03d.wav" %filecount)
+            rates[:-1] = rates[1:]
+            rates[-1] = sprate
+            
             print("rate of speech" , sprate)
-            writing = [sprate]
-            with open('ROS.csv', 'a') as file:
+            with open('ROS.csv', 'w') as file:
                 writer = csv.writer(file)
-                writer.writerow(writing)
+                writer.writerow(rates)
                 
             #saveRos.txtsave( filecount, sprate)
                 

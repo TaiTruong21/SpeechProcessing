@@ -2,12 +2,10 @@ def compare(SAMPLING_RATE= 44100):
     import numpy as np
     import matplotlib.pyplot as plt
     import struct
-    import scipy.io.wavfile as wav
     import os
     import time
     from IPython.display import clear_output
-    from Scripts import speechrate,saveRos, speechdetectmodule
-    from Scripts import saveRos
+    from Scripts import speechrate, speechdetectmodule
     import soundfile as sf
     import csv
     plt.ion()
@@ -18,7 +16,8 @@ def compare(SAMPLING_RATE= 44100):
     print("First file created!")
     print("Entering loop...\n")
     filecount =1
-    ratelog = np.zeros(filecount)
+    sprate = 0
+    rates = [0, 0]
     while True:
         try:
             # Get file size
@@ -47,14 +46,15 @@ def compare(SAMPLING_RATE= 44100):
             
             sf.write('./wavFiles/rec10%03d.wav' %filecount, data, samplerate)
             
-            if speechdetectmodule.detector("C:\\Users\\truon\\Desktop\\MayRecord31st\\MayRecord31st\\wavFiles\\rec10%03d.wav" %filecount):
+            if speechdetectmodule.detect5sec("C:\\Users\\truon\\Desktop\\MayRecord31st\\MayRecord31st\\wavFiles\\rec10%03d.wav" %filecount):
                 sprate = speechrate.getrate(filecount=filecount,wave_file = "wavFiles\\rec10%03d.wav" %filecount)
                 print("rate of speech" , sprate)
+                rates[:-1] = rates[1:]
+                rates[-1] = sprate
                 #saveRos.txtsave( filecount, sprate)
-                writing = [sprate]
-                with open('ROS.csv', 'a') as file:
+                with open('ROS.csv', 'w') as file:
                     writer = csv.writer(file)
-                    writer.writerow(writing)
+                    writer.writerow(rates)
                 
                 
             
