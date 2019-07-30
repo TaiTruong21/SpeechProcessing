@@ -105,7 +105,7 @@ def detect5sec(dataPath, params = [43,775], frameSize = 0.5):
             isSpeech = False
             continue
         pwr = mag**2
-        vols = max(pwr)
+        vols = np.argmax(pwr)
         allvol = [allvol, vols]
         energy = np.sum(pwr)/(fftN//2)
         if (energy < eThresh):
