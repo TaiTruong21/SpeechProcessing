@@ -13,6 +13,7 @@ SERVER_PORT = 50123
 SAMPLE_RATE = 44100
 SECONDS = 5
 FILE_DURATION = 2 # Seconds
+size = [0, 0]
 
 # Create a TCP socket server
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -65,29 +66,30 @@ while True:
 #            data.values.tolist()
 #            print(data)
            data= np.genfromtxt('ROS.csv', dtype = float, delimiter = ',')
-
+           print("data:", data)
            if os.path.exists("Scripts\\mic10003.raw") :
                 print("count:", filecount)
                 print("length: ",data.size)
-                print(data)
-                if (data.size>filecount):
-                    count = 0
-                    num1 = data[count]
-                    num2 = data[count+1]
-                    avg = (num1+num2)/2
-                    if(avg>= 5.0):
-                        mes = b'You are speaking too fast'
-                        print("Data Sent")
-                        connection.send(mes)
-                        #playsound
-                        frequency = 2500  # Set Frequency To 2500 Hertz
-                        duration = 1000  # Set Duration To 1000 ms == 1 second
-                        winsound.Beep(frequency, duration)
-                    else:
-                        mes = b''
-                        connection.send(mes)
-                        
-                    count +=1
+                               
+                num1 = data[-1]
+                print("num1:",num1)
+                num2 = data[-2]
+                print("num2:",num2)
+                avg = (num1+num2)/2
+                print("avg:",avg) 
+                if(avg>= 5.0):
+                    mes = b'You are speaking too fast'
+                    print("Data Sent")
+                    connection.send(mes)
+                    #playsound
+                    frequency = 440  # Set Frequency To 2500 Hertz
+                    duration = 1000  # Set Duration To 1000 ms == 1 second
+                    winsound.Beep(frequency, duration)
+                else:
+                    mes = b' '
+                    connection.send(mes)
+
+                
             
             
            filecount += 1
