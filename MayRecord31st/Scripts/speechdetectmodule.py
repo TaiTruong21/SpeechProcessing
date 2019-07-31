@@ -115,7 +115,7 @@ def detect5sec(dataPath, params = [43,775], frameSize = 0.5):
             last = isSpeech
             isSpeech = True
             if (last and isSpeech):
-                return {'speech': True, 'vol': np.argmax(allvol)}
-    return False
+                return {'speech': True, 'vol': np.amax(allvol)}
+    return {'speech': False, 'vol': 0}
    
     
