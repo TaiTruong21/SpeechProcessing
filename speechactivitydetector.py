@@ -11,14 +11,15 @@ import os
 import scipy.io
 from scipy.io import wavfile as wf
 
-printout = 0;
+printout = 0
+sfmON = False
 
 Fs, data = wf.read("./exports/TaiMoonNoisy.wav")
 directory = './TaiMoonNoisyDetect/'
 T = 1/Fs
 frameSize = 0.5
 
-params = [43, 0, 775, 0]
+params = [43, 0, 775, 2500]
 
 ebase = params[0]
 fThresh = params[1]
@@ -67,16 +68,22 @@ for i in range(numFrames):
     #print('%.2f'%SFM)
     time = i*samplesPerFrame / Fs
     isSpeech = False
-    counter = 0    
+    counter = 0
+    if sfmON:
+        if SFM > sfmThresh: counter += 1
+        if domFreq < fTopThresh: counter += 1
+        if energy  > eThresh: counter += 1
+        if counter > 1:
+            allClass.append([1, time, energy/(1e8), domFreq, SFM])
+        elif counter < 2:
+            allClass.append([0, time, energy/(1e8), domFreq, SFM])
     #updates counter to determine if frame is speech
-    if (domFreq < fTopThresh) and (energy > eThresh):
-        isSpeech = True
-        allClass.append([1, time, energy/(1e8), domFreq, SFM])
-        #allClass.append([1, time])
-    else:
-        isSpeecch = False
-        allClass.append([0, time, energy/(1e8), domFreq, SFM])
-        #allClass.append([0, time])
+    elif ~(sfmON):
+        if (domFreq < fTopThresh) and (energy > eThresh):
+            allClass.append([1, time, energy/(1e8), domFreq, SFM])
+            #allClass.append([1, time])
+        else:
+            allClass.append([0, time, energy/(1e8), domFreq, SFM])
 
 if printout:
     print("samplesPerFrame = ",samplesPerFrame)
@@ -90,4 +97,4 @@ if printout:
 if not os.path.exists(directory):
     os.makedirs(directory)
 #np.savetxt('results.txt', np.matrix(allClass), fmt='%.2f')
-np.savetxt('%se%d_f%d_%d_s%d.csv'%(directory, ebase, fThresh, fTopThresh, sfmThresh), np.matrix(allClass), delimiter = ',', fmt='%.1f')
+np.savetxt('%sresultNoSFM.csv'%directory, np.matrix(allClass), delimiter = ',', fmt='%.1f')

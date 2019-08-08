@@ -88,10 +88,10 @@ end
 % figure(2);
 % pos1 = get(gcf,'Position'); % get position of Figure(1) 
 % subplot(3,1,1);
-xx = [12 19];
+xx = [107 117];
 f5 = figure(5);
 
-ylim([0 1000]);
+ylim([0 400]);
 set(gca,'DefaultTextFontSize',18)
 title('Audio Signal Energy (Excerpt)');
 refline(0,43);
@@ -137,8 +137,6 @@ legend('Speech', 'Location', 'northeast');
 xlim(xx);
 xlabel('Time (seconds)');
 ylabel('SFM Level');
-
-figure(50)
 
 %% accuracy
 figure(1);
@@ -193,23 +191,15 @@ for fn=fields'
 %     text(time(end)/2 - 35, counter+0.5, ['Accuracy: ' num2str(accuracy.(fn{1}) * 100) '%']);
 %     text(time(end)/2, counter+0.5, ['Speech Accuracy: ' num2str(speechacc.(fn{1}) * 100) '%']);
 %     text(time(end) - 25, counter+0.5, ['Noise Accuracy: ' num2str(noiseacc.(fn{1}) * 100) '%']);
-    counter = counter - 1;
+%     counter = counter - 1;
 end
 
-    text(1, 1.5, 'With SFM');
-    text(1, 0.5, 'Without SFM');
-    nosfm = sprintf('%0.f', (speechacc.resultNoSFM)*100);
-    yessfm = sprintf('%0.f', (speechacc.resultWithSFM) * 100);
-    text(time(end)/2 - 35, 1.5, ['Accuracy: ' nosfm '%']);
-    text(time(end)/2 - 35, 0.5, ['Accuracy: ' yessfm '%']);
-
-ylim([-1 3])
+ylim([counter top+1])
 grid on;
 
-text(1, top+0.5, 'Ground Truth');
+text(1, top+0.5, ['Truth || Speech: ' num2str((1 - noiseacc.truth)*100)...
+    '% || Noise: ' num2str(noiseacc.truth * 100) '%']);
 
-
-%%
 timer = 0.5:0.5:170;
 for i = 1:numel(timer)
     for r = 1:length(D.(fn{1}))
