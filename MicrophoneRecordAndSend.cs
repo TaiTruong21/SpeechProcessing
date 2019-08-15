@@ -1,8 +1,10 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Net;
+using System.Threading;
 using System.Text;
+using UnityEngine.XR.MagicLeap;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,11 +14,16 @@ public class MicrophoneRecordAndSend : MonoBehaviour
 
     private string micName;
     private TcpClient socketConnection;
+    private string serverMessage;
+    //private string path;
     public Text micText;
-    public Text connectionText;
     public Text pythonText;
     public Text testText;
-    private int count = 2;
+    public Image flag;
+    private int len;
+    Camera mainCam;
+    private Thread clientReceiveThread;
+    private int count = 5;
 
     [Tooltip("Use the window length to adjust latency (How much it records before sending)")]
     public int windowLength = 100;
@@ -29,15 +36,25 @@ public class MicrophoneRecordAndSend : MonoBehaviour
     private string TCPSocketAddress = "localhost";
 
     AudioClip recordedAudio;
-    
+
 
     void Awake()
     {
         socketConnection = new TcpClient(TCPSocketAddress, TCPSocketPort);
         Debug.Log("Connected to:\nServer: " + TCPSocketAddress + "\nPort: " + TCPSocketPort.ToString());
+        ConnectToTcpServer();
+
+
+
 
 
     }
+
+    //void Start()
+    //{
+    //ConnectToTcpServer(); 
+
+    //}
 
 
     // Start is called before the first frame update
@@ -48,6 +65,7 @@ public class MicrophoneRecordAndSend : MonoBehaviour
         if (Microphone.devices.Length > 0)
         {
             micName = Microphone.devices[0];
+            micText.text = "" + micName;
         }
 
         AudioSource audioSource = GetComponent<AudioSource>();
@@ -61,36 +79,33 @@ public class MicrophoneRecordAndSend : MonoBehaviour
             recordedAudio = Microphone.Start(micName, true, windowLength, 44100);
             //false on Magicleap: record tfor a few sencond then the length becomes 0
             //audioSource.clip = Microphone.Start(micName, true, 5, 44100);
-            //audioSource.Play();
+            pythonText.text = "Recording";
             Debug.Log("recording");
 
 
         }
+        //ConnectToTcpServer();
     }
 
     int lastPos;
     void LateUpdate()
     {
         int currentPos = Microphone.GetPosition(micName);
-        if(lastPos > currentPos)
+        if (lastPos > currentPos)
         {
             lastPos = 0;
         }
-        //Debug.Log("Last Pos" + lastPos);
-        //Debug.Log("current possition" + currentPos);
-        // have we recorded something since last update?
-        pythonText.text = "Last Pos:" + lastPos;
-        testText.text = "Current Pos" + currentPos;
 
-        if (currentPos >= count*44100-100)
+
+        if (currentPos >= count * 44100 - 100)
         {
-            int length = 88200;
+            int length = 220500;
             //int length = currentPos - lastPos;
-            
+
             // get the data from the audio clip as floats
             float[] clipData = new float[length];
             recordedAudio.GetData(clipData, lastPos);
-            
+
             Debug.Log("Recorded (s): " + length / 44100.0);
             testText.text = "Recorded (s): " + length / 44100;
 
@@ -98,9 +113,9 @@ public class MicrophoneRecordAndSend : MonoBehaviour
             byte[] clipDataInBytes = new byte[clipData.Length * 4];
             Buffer.BlockCopy(clipData, 0, clipDataInBytes, 0, clipDataInBytes.Length);
 
-
             // send it to the server
             NetworkStream stream = socketConnection.GetStream();
+
 
             //  save the size of the recording into an array of bytes (big endian)
             int recordingByteSize = clipDataInBytes.Length; // length of the recording in bytes (that's the size of the byte array)
@@ -112,12 +127,86 @@ public class MicrophoneRecordAndSend : MonoBehaviour
             // send that to the server
             stream.Write(intBytes, 0, intBytes.Length);
             //Debug.Log("Sent 4 bytes with file size: " + recordingByteSize);
+
+            Debug.Log("recieved:" + serverMessage);
+            micText.text = "message length: " + len;
+
+            if (len > 5)
+            {
+                flag.fillMethod = Image.FillMethod.Radial90;
+                flag.fillAmount = 1;
+            }
+            else
+            {
+                flag.fillMethod = Image.FillMethod.Radial90;
+                flag.fillAmount = 0;
+            }
+
             //Debug.Log(result);
+            Debug.Log("recieved:" + serverMessage);
+            micText.text = "message length: " + len;
+
 
             stream.Write(clipDataInBytes, 0, clipDataInBytes.Length);
             lastPos = currentPos;
-            count = count + 2;
+            count = count + 5;
+            //adjust audio source
+            //AudioSource audio = GetComponent<AudioSource>();
+            //audio.maxDistance = 1; 
 
+
+
+        }
+
+    }
+    private void ConnectToTcpServer()
+    {
+        try
+        {
+            clientReceiveThread = new Thread(new ThreadStart(ListenForData));
+            clientReceiveThread.IsBackground = true;
+            clientReceiveThread.Start();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("On client connect exception " + e);
+        }
+    }
+    private void ListenForData()
+    {
+
+        try
+        {
+
+            Byte[] bytes = new Byte[1024];
+            while (true)
+            {
+
+                // Get a stream object for reading 				
+                using (NetworkStream stream = socketConnection.GetStream())
+                {
+
+
+                    // Read incomming stream into byte arrary. 					
+                    while ((len = stream.Read(bytes, 0, bytes.Length)) != 0)
+                    {
+                        var incommingData = new byte[len];
+                        Array.Copy(bytes, 0, incommingData, 0, len);
+                        //Convert byte array to string message. 						
+                        serverMessage = Encoding.ASCII.GetString(incommingData);
+                        Debug.Log("server message received as: " + serverMessage);
+
+
+                    }
+
+                }
+
+
+            }
+        }
+        catch (SocketException socketException)
+        {
+            Debug.Log("Socket exception: " + socketException);
         }
     }
 
@@ -127,4 +216,3 @@ public class MicrophoneRecordAndSend : MonoBehaviour
     }
 
 }
-

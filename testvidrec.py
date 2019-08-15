@@ -9,10 +9,10 @@ import os
 
 i = 0
 while True:
-    vidCap = 'mldb capture video -t 5 rectest%d.mp4'%i
+    vidCap = 'mldb -d -w capture video -t 3 rectest%d.mp4'%i
     os.system(vidCap)
     print('recording %d made'%i)
     i += 1
-    if i > 3:
+    if i > 1:
         break
 
