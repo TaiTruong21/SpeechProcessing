@@ -10,9 +10,9 @@ README:
 import os
 from pydub import AudioSegment
 
-combinationName = '13mininterview'
+combinationName = 'Vol2Stitch'
 directory = './exports/'
-sourceDir = './Recordings/13ish mins/'
+sourceDir = './Recordings/Vol2/'
 combined = AudioSegment.empty()
 
 for file in os.listdir(sourceDir):
