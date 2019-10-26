@@ -1,0 +1,304 @@
+{
+ "entries": [
+  {
+   "compression": 8,
+   "hash": "93803023257a9bd1f9343938f9fe0d691d62f0fa",
+   "pkgpath": "Data/Managed/Metadata/global-metadata.dat",
+   "size": 3547368,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Managed/Metadata/global-metadata.dat"
+  },
+  {
+   "compression": 8,
+   "hash": "2ec9ddaaaa6c4c78b4b0d7693ccffca555f9c052",
+   "pkgpath": "bin/libil2cpp.so",
+   "size": 56387072,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Native/libil2cpp.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\truon\\Downloads\\magicleap_certificate\\magicleap_certificate\\initial.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "2d8a25693569c358da35e0b066f35fe1db3cfb2b",
+   "xfrm_path": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/.out/.cache/debug_lumin_clang-3.8_aarch64/com.roy.testmicpy-4298ef26703e17d8\\libil2cpp.so-de43376de0967bd0",
+   "xfrm_size": 56387830
+  },
+  {
+   "compression": 8,
+   "hash": "fa2b8ff146caf64688e7aa835af0034ca81b5505",
+   "pkgpath": "bin/AudioPluginMSASpatializer.so",
+   "size": 282448,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Plugins/AudioPluginMSASpatializer.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\truon\\Downloads\\magicleap_certificate\\magicleap_certificate\\initial.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "0fb8f6754c185c12cc0b8875f1b908b57076cbe1",
+   "xfrm_path": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/.out/.cache/debug_lumin_clang-3.8_aarch64/com.roy.testmicpy-4298ef26703e17d8\\AudioPluginMSASpatializer.so-c12fead00771cfcf",
+   "xfrm_size": 283206
+  },
+  {
+   "compression": 8,
+   "hash": "f577ca4311f747d3c3def9af66848ed34363d044",
+   "pkgpath": "bin/LuminMediaPlayer.dll",
+   "size": 68608,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Plugins/LuminMediaPlayer.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "271ef4a915e6921bc4313af8869402e38ca9bb01",
+   "pkgpath": "bin/LuminUnity.dll",
+   "size": 329216,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Plugins/LuminUnity.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "b8ce049d2e85f27cc7346d7551d1853b20e78461",
+   "pkgpath": "bin/MSA.Runtime.dll",
+   "size": 22016,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Plugins/MSA.Runtime.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "a71acc50817a0929bccc93cbe7619d57d25d1b17",
+   "pkgpath": "bin/UnityMagicLeap.so",
+   "size": 3077192,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Plugins/UnityMagicLeap.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\truon\\Downloads\\magicleap_certificate\\magicleap_certificate\\initial.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "97ea2f1e1c6ea6bdaede21dc3151d8a1d59c5d83",
+   "xfrm_path": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/.out/.cache/debug_lumin_clang-3.8_aarch64/com.roy.testmicpy-4298ef26703e17d8\\UnityMagicLeap.so-c12fead00771cfcf",
+   "xfrm_size": 3077950
+  },
+  {
+   "compression": 8,
+   "hash": "fbfa4a6aa20b14e0f60550676e5d34bebb99d46d",
+   "pkgpath": "bin/libml_camera_plugin.so",
+   "size": 14184,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Plugins/libml_camera_plugin.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\truon\\Downloads\\magicleap_certificate\\magicleap_certificate\\initial.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "3a0572e0897134a5b40db7a888a0cc6cd1aeea7f",
+   "xfrm_path": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/.out/.cache/debug_lumin_clang-3.8_aarch64/com.roy.testmicpy-4298ef26703e17d8\\libml_camera_plugin.so-c12fead00771cfcf",
+   "xfrm_size": 14942
+  },
+  {
+   "compression": 8,
+   "hash": "88ac1047e0ac5686d703471c3115f719ca66a4e8",
+   "pkgpath": "bin/libml_mediaplayer_plugin.so",
+   "size": 67624,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Plugins/libml_mediaplayer_plugin.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\truon\\Downloads\\magicleap_certificate\\magicleap_certificate\\initial.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "46ac426f3638c2119916fe9a52b0ef89bae6f342",
+   "xfrm_path": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/.out/.cache/debug_lumin_clang-3.8_aarch64/com.roy.testmicpy-4298ef26703e17d8\\libml_mediaplayer_plugin.so-c12fead00771cfcf",
+   "xfrm_size": 68382
+  },
+  {
+   "compression": 8,
+   "hash": "984e4d2049ed5491b970ba15d1e8c8cadac0896e",
+   "pkgpath": "bin/nunit.framework.dll",
+   "size": 339968,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Plugins/nunit.framework.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "e6124da6073b916e29e013cf3ae3f58a4c5fdb0e",
+   "pkgpath": "Data/Resources/mscorlib.dll-resources.dat",
+   "size": 337563,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Resources/mscorlib.dll-resources.dat"
+  },
+  {
+   "compression": 8,
+   "hash": "fa10859a933989c5961257c02d9f4fcf042044f1",
+   "pkgpath": "Data/Resources/unity default resources",
+   "size": 3689324,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Resources/unity default resources"
+  },
+  {
+   "compression": 8,
+   "hash": "108e7ad9beeb0ead603a2eb7c1ae8bd5b1673410",
+   "pkgpath": "Data/Resources/unity_builtin_extra",
+   "size": 770468,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/Resources/unity_builtin_extra"
+  },
+  {
+   "compression": 8,
+   "hash": "778891100a8030ad6096db64784c6e5d67c28378",
+   "pkgpath": "Data/UnitySubsystems/UnityMagicLeap/UnitySubsystemsManifest.json",
+   "size": 417,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/UnitySubsystems/UnityMagicLeap/UnitySubsystemsManifest.json"
+  },
+  {
+   "compression": 8,
+   "hash": "bcda84c073cc5c8eb6c446bf3b578720a941816b",
+   "pkgpath": "Data/boot.config",
+   "size": 248,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/boot.config"
+  },
+  {
+   "compression": 8,
+   "hash": "c9ceac3e7bf5dff92b6509ed561eaf1d7ca97059",
+   "pkgpath": "Data/globalgamemanagers",
+   "size": 71288,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/globalgamemanagers"
+  },
+  {
+   "compression": 8,
+   "hash": "b3e2fa71ac73820dd0b60581a6471ae9b08e3d32",
+   "pkgpath": "Data/globalgamemanagers.assets",
+   "size": 110704,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/globalgamemanagers.assets"
+  },
+  {
+   "compression": 8,
+   "hash": "feaa73cd38a405dda387e526bc44310305d2f0de",
+   "pkgpath": "Data/level0",
+   "size": 13268,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/level0"
+  },
+  {
+   "compression": 8,
+   "hash": "c4fcdf44ed7f5932492f149f6e27233a9c159aa7",
+   "pkgpath": "Data/level0.resS",
+   "size": 131232,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/level0.resS"
+  },
+  {
+   "compression": 8,
+   "hash": "57b606791e63d4f9ec7574fd7f9df50373a35731",
+   "pkgpath": "Data/resources.assets",
+   "size": 572648,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/resources.assets"
+  },
+  {
+   "compression": 8,
+   "hash": "459238a036cf827c9a4573987a0d7f5126b044be",
+   "pkgpath": "Data/resources.assets.resS",
+   "size": 654172,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/resources.assets.resS"
+  },
+  {
+   "compression": 8,
+   "hash": "6cdc0e4cbe1201c4ca6f1a16e833814ac2bbc3a8",
+   "pkgpath": "Data/resources.resource",
+   "size": 5875136,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/resources.resource"
+  },
+  {
+   "compression": 8,
+   "hash": "0a64a1d034e7be0380fff6ee16e2acad322da417",
+   "pkgpath": "Data/sharedassets0.assets",
+   "size": 289576,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/sharedassets0.assets"
+  },
+  {
+   "compression": 8,
+   "hash": "020d9e0bcacec00178b573ac35532668f8342484",
+   "pkgpath": "Data/sharedassets0.assets.resS",
+   "size": 80000,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Data/sharedassets0.assets.resS"
+  },
+  {
+   "compression": 8,
+   "hash": "aa83449dd7e1e9658e91497773d88314cab3b0da",
+   "pkgpath": "bin/Player.elf",
+   "size": 49505704,
+   "src": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/Temp/StagingArea/Player.elf",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\truon\\Downloads\\magicleap_certificate\\magicleap_certificate\\initial.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "b81c3f9287ddf074fb35473bca8a62a24392f6e6",
+   "xfrm_path": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/.out/.cache/debug_lumin_clang-3.8_aarch64/com.roy.testmicpy-4298ef26703e17d8\\Player.elf-cf75df0f90afdb0c",
+   "xfrm_size": 49506462
+  },
+  {
+   "compression": 8,
+   "hash": "5925de9f4d7b83c65d1fd7b25ced5f0bf8c27e73",
+   "pkgpath": "bin/libc++_shared.so",
+   "size": 976832,
+   "src": "C:/Users/truon/MagicLeap/mlsdk/v0.22.0/lumin/stl/libc++/lib/libc++_shared.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\truon\\Downloads\\magicleap_certificate\\magicleap_certificate\\initial.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "a68d394dc1b270ab8f739ff580187d389b59449f",
+   "xfrm_path": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/.out/.cache/debug_lumin_clang-3.8_aarch64/com.roy.testmicpy-4298ef26703e17d8\\libc++_shared.so-10fc1ee7a3afc35c",
+   "xfrm_size": 977590
+  },
+  {
+   "compression": 8,
+   "hash": "946ed08011f3ab7be51cd36c4844681da19cd534",
+   "pkgpath": "manifest.xml",
+   "size": 640,
+   "src": "C:\\Users\\truon\\Desktop\\MayRecord31st\\MayRecord31st\\Temp\\StagingArea\\manifest.xml",
+   "xfrm_flags": {
+    "manifest": {
+     "cert_hash": "5e0d4cd294e028f618243d1da085bc6772056971",
+     "developer_id": "da65d50d-6a3f-4efd-bccd-6ef143a42bfb"
+    }
+   },
+   "xfrm_hash": "af982137a9ed065b4c7dc76af719666e679d37d6",
+   "xfrm_path": "C:/Users/truon/Desktop/MayRecord31st/MayRecord31st/.out/.cache/debug_lumin_clang-3.8_aarch64/com.roy.testmicpy-4298ef26703e17d8\\manifest.xml-cf75df0f90afdb0c",
+   "xfrm_size": 652
+  }
+ ],
+ "pkgflags": {
+  "signed": {
+   "cert": "C:\\Users\\truon\\Downloads\\magicleap_certificate\\magicleap_certificate\\initial.cert"
+  },
+  "taildata": {
+   "debuggable": true,
+   "devcert": "C:\\Users\\truon\\Downloads\\magicleap_certificate\\magicleap_certificate\\initial.cert",
+   "sbox": "USER",
+   "version": 3
+  }
+ }
+}

@@ -1,0 +1,10 @@
+<manifest xmlns:ml="magicleap" ml:developer_id="da65d50d-6a3f-4efd-bccd-6ef143a42bfb" ml:package="com.roy.testmicpy" ml:version_code="1" ml:version_name="1">
+  <application ml:min_api_level="4" ml:sdk_version="1.0" ml:visible_name="MayRecord31st">
+    <component ml:binary_name="bin/Player.elf" ml:name=".fullscreen" ml:type="Fullscreen" ml:visible_name="MayRecord31st">
+      <icon ml:model_folder="Icon/Model" ml:portal_folder="Icon/Portal" />
+    </component>
+    <uses-privilege ml:name="LowLatencyLightwear" />
+    <uses-privilege ml:name="LocalAreaNetwork" />
+    <uses-privilege ml:name="AudioCaptureMic" />
+  </application>
+</manifest>
